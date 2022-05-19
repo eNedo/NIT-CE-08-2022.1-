@@ -3,9 +3,48 @@ from hashlib import new
 import json
 import glob
 import os
-from traceback import print_tb
 import re
 import ipaddress
+from traceback import print_tb
+<<<<<<< HEAD
+import re
+import ipaddress
+=======
+
+
+
+
+
+#used for email validation 
+regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@][a-z0-9]+[\.-]?[a-z0-9]+[.]\w{2,3}$'
+
+"""
+Validates emails.
+Returns: 
+        0 - ok 
+        1 - email not valid 
+"""
+def check(email):
+    if (re.search(regex, email)):
+        return 0
+    else:
+        return 1
+
+"""
+Validates ip addresses.
+Returns: 
+        0 - ok 
+        1 - ip address not valid 
+"""
+def validate_ip_address(address):
+    try:
+        ip = ipaddress.ip_address(address)
+        return 0
+    except ValueError:
+        return 1
+
+
+>>>>>>> 20a1719a0dc3148ea99b9496eedb9374ca6b3ff5
 class User_register:
     users=[]
 
@@ -33,27 +72,49 @@ class User_register:
             if not added:
                 self.users.append(dict(d))
                 added=True
-                
-    #TODO check is full name valid 
-    def setNameSurname(self, email, name): 
-        for user in self.users:
-            if user.get("email")==email: 
-                user.update({"name":name})
-        return "No one is associated with " + email 
 
-    #TODO check is IP valid
+   
+    def setNameSurname(self, email, name): 
+        if isinstance(name,str): 
+            for user in self.users:
+                if user.get("email")==email: 
+                    user.update({"name":name})
+            return "No one is associated with " + email 
+        else: 
+            print("Given argument is not string!")
+            
+     
     def setIP(self, email, ip): 
+        if not isinstance(email,str): 
+            print("Given argument is not string!")
+            return 
+        if validate_ip_address(ip)==1: 
+            print("IP is not valid!")
+            return 
         for user in self.users:
             if user.get("email")==email: 
                 user.update({"ip":ip})
-        return "No IP associated with " + email 
+                return 
+        print("No IP associated with " + email)
 
-    #TODO maybe check does it contains keywords like desktop,mobile or laptop
+    
     def setDevices(self, email, devices): 
-        for user in self.users:
-            if user.get("email")==email: 
-                user.update({"devices":devices})
-        return "No devices associated with " + email 
+        if isinstance(devices,list):
+            valid=True
+            for device in devices: 
+                if "laptop" not in device and "desktop" not in device and "mobile" not in device: 
+                    valid=False
+            if not valid: 
+                print("Device tags are not valid!")
+                return
+            for user in self.users:
+                if user.get("email")==email: 
+                    user.update({"devices":devices})
+                    return
+            print("No devices associated with " + email)
+            return 
+        else: 
+            print("Device argument is not list!")
 
     def getNameSurname(self,email): 
         for user in self.users:
@@ -81,6 +142,7 @@ class User_register:
             string = string + str(user) + "\n"
         return string  
             
+<<<<<<< HEAD
     def __getitem__(self,key):
         for i in range(len(self.users)):
             if(self.users[i]['email']==key):
@@ -95,6 +157,9 @@ class User_register:
 
     def __len__(self):
         return len(self.users)
+=======
+
+>>>>>>> 20a1719a0dc3148ea99b9496eedb9374ca6b3ff5
 
     def checkEmail(email):
         regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
@@ -130,18 +195,15 @@ def loadUsers(foldername):
 d = loadUsers('users')
 ur=User_register(d)
 print(ur)
-print(len(ur))
+
 print(ur.getNameSurname("bojan.djukic@rt-rk.com"))
 print(ur.getDevices("bojan.djukic@rt-rk.com"))
 print(ur.getIP("bojn.djukic@rt-rk.com"))
 
-devices =[ "uredjaj1", "uredjaj2"]
+devices =[ "desktop 1", "mobile 2"]
 ur.setDevices("bojan.djukic@rt-rk.com",devices)
-ur.setIP("bojan.djukic@rt-rk.com","1001")
+ur.setIP("bojan.djukic@rt-rk.com","100.100.100.100")
 ur.setNameSurname("bojan.djukic@rt-rk.com","xx")
-
-print(ur["bojan.djukic@rt-rk.com"])
-
 
 print(ur.getUser("bojan.djukic@rt-rk.com"))
 
