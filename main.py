@@ -41,7 +41,7 @@ def validate_ip_address(address):
 
 
 class User_register():
-
+    users=[]
     def __init__(self,files):
         self.files = files
         datasum = []
@@ -51,7 +51,7 @@ class User_register():
                 datasum.append(studentDict)
 
         listObj = []
-        users = []
+        #users = []
         fsum=open('sumfile.json', 'w')
         for data in datasum:
             for i in range(len(data)):
@@ -64,29 +64,29 @@ class User_register():
                         listObj.append(data[i])
         for d in listObj:
             added = False
-            if len(users) == 0:
-                users.append(dict(d))
+            if len(self.users) == 0:
+                self.users.append(dict(d))
                 added = True
 
             if not added:
-                for i in range(len(users)):
-                    if users[i]['email'] == d['email']:
-                        dev1 = users[i]['devices']
+                for i in range(len(self.users)):
+                    if self.users[i]['email'] == d['email']:
+                        dev1 = self.users[i]['devices']
                         dev2 = d['devices']
                         new_dev = []
                         for el in dev2:
                             if el not in dev1:
                                 new_dev.append(el)
                         if len(new_dev) != 0:
-                            users[i]['devices'].append(new_dev)
+                            self.users[i]['devices'].append(new_dev)
                         added = True
             if not added:
-                users.append(dict(d))
+                self.users.append(dict(d))
                 added = True
-        json_object = json.dumps(users, indent=4)
+        json_object = json.dumps(self.users, indent=4)
         fsum.write(json_object)
         fsum.close()
-        print(listObj)
+        #print(listObj)
 
    
     def setNameSurname(self, email, name): 
@@ -190,7 +190,12 @@ def getListOfFiles(foldername):
 
 d = getListOfFiles('users')
 ur=User_register(d)
+dd = getListOfFiles('users2')
+ur2=User_register(dd)
+
 print(ur)
+print("*********************************************************")
+print(ur2)
 
 print(ur.getNameSurname("bojan.djukic@rt-rk.com"))
 print(ur.getDevices("bojan.djukic@rt-rk.com"))
@@ -205,6 +210,7 @@ print(ur.getUser("bojan.djukic@rt-rk.com"))
 
 print(len(ur))
 print(ur["bojan.djukic@rt-rk.com"])
-
+print("************************************************************")
+print(len(ur2))
         
 

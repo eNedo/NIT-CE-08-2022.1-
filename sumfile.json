@@ -1,0 +1,235 @@
+[
+    {
+        "name": "Nedo Todoric",
+        "email": "nedo.todoric@rt-rk.com",
+        "ip": "192.168.100.3",
+        "devices": [
+            "desktop RTRK-3",
+            "mobile MB-3"
+        ]
+    },
+    {
+        "name": "Djordje Bogdanic",
+        "email": "djordje.bogdanic@rt-rk.com",
+        "ip": "192.168.100.4",
+        "devices": [
+            "desktop RTRK-4",
+            "mobile MB-4"
+        ]
+    },
+    {
+        "name": "Dragisa Zunic",
+        "email": "dragisa.zunic@rt-rk.com",
+        "ip": "192.168.100.5",
+        "devices": [
+            "desktop RTRK-5",
+            "mobile MB-5"
+        ]
+    },
+    {
+        "name": "Marko Markovic",
+        "email": "marko.markovic@rt-rk.com",
+        "ip": "192.168.100.6",
+        "devices": [
+            "desktop RTRK-6",
+            "mobile MB-6"
+        ]
+    },
+    {
+        "name": "Vanja Zeric",
+        "email": "vanja.zeric@rt-rk.com",
+        "ip": "192.168.100.7",
+        "devices": [
+            "desktop RTRK-7",
+            "mobile MB-7"
+        ]
+    },
+    {
+        "name": "Igor Vincic",
+        "email": "igor.vincic@rt-rk.com",
+        "ip": "192.168.100.8",
+        "devices": [
+            "desktop RTRK-8",
+            "mobile MB-8"
+        ]
+    },
+    {
+        "name": "Nikola Jeftenic",
+        "email": "nikola.jeftenic@rt-rk.com",
+        "ip": "192.168.100.1",
+        "devices": [
+            "desktop RTRK-12",
+            "mobile MB-11",
+            [
+                "desktop RTRK-1",
+                "mobile MB-1"
+            ],
+            [
+                "desktop RTRK-1",
+                "mobile MB-1"
+            ]
+        ]
+    },
+    {
+        "name": "Jelena Kovacevic",
+        "email": "jelena.kovacevic@rt-rk.com",
+        "ip": "192.168.100.2",
+        "devices": [
+            "desktop RTRK-1",
+            "mobile MB-1"
+        ]
+    },
+    {
+        "name": "Levon Kaleman",
+        "email": "levon.kaleman@rt-rk.com",
+        "ip": "192.168.100.9",
+        "devices": [
+            "desktop RTRK-9",
+            "mobile MB-9"
+        ]
+    },
+    {
+        "name": "Dragana Stankovic",
+        "email": "dragana.stankovic@rt-rk.com",
+        "ip": "192.168.100.10",
+        "devices": [
+            "desktop RTRK-10",
+            "mobile MB-10"
+        ]
+    },
+    {
+        "name": "Zeljko Ilic",
+        "email": "zeljko.ilic@rt-rk.com",
+        "ip": "192.168.100.11",
+        "devices": [
+            "desktop RTRK-11",
+            "mobile MB-11"
+        ]
+    },
+    {
+        "name": "Nemanja Tasic",
+        "email": "nemanja.tasic@rt-rk.com",
+        "ip": "192.168.100.12",
+        "devices": [
+            "desktop RTRK-12",
+            "mobile MB-12"
+        ]
+    },
+    {
+        "name": "Nemanja Koprena",
+        "email": "nemanja.koprena@rt-rk.com",
+        "ip": "192.168.100.13",
+        "devices": [
+            "desktop RTRK-13",
+            "mobile MB-13"
+        ]
+    },
+    {
+        "name": "Ana Laketa",
+        "email": "ana.laketa@rt-rk.com",
+        "ip": "192.168.100.14",
+        "devices": [
+            "desktop RTRK-14",
+            "mobile MB-14"
+        ]
+    },
+    {
+        "name": "Nikola Svilar",
+        "email": "nikola.svilar@rt-rk.com",
+        "ip": "192.168.100.15",
+        "devices": [
+            "desktop RTRK-15",
+            "mobile MB-15"
+        ]
+    },
+    {
+        "name": "Zelimir Maletic",
+        "email": "zelimir.maletic@rt-rk.com",
+        "ip": "192.168.100.16",
+        "devices": [
+            "desktop RTRK-16",
+            "mobile MB-16"
+        ]
+    },
+    {
+        "name": "Nemanja Smitran",
+        "email": "nemanja.smitran@rt-rk.com",
+        "ip": "192.168.100.17",
+        "devices": [
+            "desktop RTRK-17",
+            "mobile MB-17"
+        ]
+    },
+    {
+        "name": "Maja Savic",
+        "email": "maja.savic@rt-rk.com",
+        "ip": "192.168.100.19",
+        "devices": [
+            "desktop RTRK-19",
+            "mobile MB-19"
+        ]
+    },
+    {
+        "name": "Nikola Karpic",
+        "email": "nikola.karpic@rt-rk.com",
+        "ip": "192.168.100.20",
+        "devices": [
+            "desktop RTRK-20",
+            "mobile MB-20"
+        ]
+    },
+    {
+        "name": "Tanja Buha",
+        "email": "tanja.buha@rt-rk.com",
+        "ip": "192.168.100.21",
+        "devices": [
+            "desktop RTRK-21",
+            "mobile MB-21"
+        ]
+    },
+    {
+        "name": "Bojan Djukic",
+        "email": "bojan.djukic@rt-rk.com",
+        "ip": "192.168.100.22",
+        "devices": [
+            "desktop RTRK-22",
+            "mobile MB-22"
+        ]
+    },
+    {
+        "name": "Bojana Dejanovic",
+        "email": "bojana.dejanovic@rt-rk.com",
+        "ip": "192.168.100.23",
+        "devices": [
+            "desktop RTRK-23",
+            "mobile MB-23"
+        ]
+    },
+    {
+        "name": "Maksim Vuleta",
+        "email": "maksim.vuleta@rt-rk.com",
+        "ip": "192.168.100.24",
+        "devices": [
+            "desktop RTRK-24",
+            "mobile MB-24"
+        ]
+    },
+    {
+        "name": "Srdjan Popic",
+        "email": "srdjan.popic@rt-rk.com",
+        "ip": "192.168.100.25",
+        "devices": [
+            "desktop RTRK-25",
+            "mobile MB-25"
+        ]
+    },
+    {
+        "name": "Drazen Pezer",
+        "email": "drazen.pezer@rt-rk.com",
+        "ip": "192.168.100.26",
+        "devices": [
+            "desktop RTRK-26",
+            "mobile MB-26"
+        ]
+    }
+]

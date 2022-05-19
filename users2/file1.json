@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Nikola Jeftenic",
+    "email": "nikola.jeftenic@rt-rk.com",
+    "ip": ".168.100.1",
+    "devices": ["desktop RTRK-1", "mobile MB-1"]
+  },
+  {
+    "name": "Jelena Kovacevic",
+    "email": "*jelena.kovacevic@rt-rk.com",
+    "ip": "192.168.100.2",
+    "devices": ["desktop RTRK-2", "mobile MB-2"]   
+  },
+    {
+    "name": "Nedo Todoric",
+    "email": "nedo.todoric@rt-rk.com",
+    "ip": "192.168.100.3",
+    "devices": ["desktop RTRK-3", "mobile MB-3"]  
+  },
+  {
+    "name": "Djordje Bogdanic",
+    "email": "djordje.bogdanic@rt-rk.com",
+    "ip": "192.168.100.4",
+    "devices": ["desktop RTRK-4", "mobile MB-4"]   
+  },
+  {
+    "name": "Dragisa Zunic",
+    "email": "dragisa.zunic@rt-rk.com",
+    "ip": "192.168.100.5",
+    "devices": ["desktop RTRK-5", "mobile MB-5"]   
+  },
+  {
+    "name": "Marko Markovic",
+    "email": "marko.markovic@rt-rk.com",
+    "ip": "192.168.100.6",
+    "devices": ["desktop RTRK-6", "mobile MB-6"]  
+  },
+  {
+    "name": "Vanja Zeric",
+    "email": "vanja.zeric@rt-rk.com",
+    "ip": "192.168.100.7",
+    "devices": ["desktop RTRK-7", "mobile MB-7"]    
+  },
+  {
+    "name": "Igor Vincic",
+    "email": "igor.vincic@rt-rk.com",
+    "ip": "192.168.100.8",
+    "devices": ["desktop RTRK-8", "mobile MB-8"]    
+  }
+]
