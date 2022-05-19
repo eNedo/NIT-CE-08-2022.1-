@@ -8,38 +8,6 @@ import ipaddress
 from traceback import print_tb
 
 
-
-
-
-#used for email validation 
-regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@][a-z0-9]+[\.-]?[a-z0-9]+[.]\w{2,3}$'
-
-"""
-Validates emails.
-Returns: 
-        0 - ok 
-        1 - email not valid 
-"""
-def check(email):
-    if (re.search(regex, email)):
-        return 0
-    else:
-        return 1
-
-"""
-Validates ip addresses.
-Returns: 
-        0 - ok 
-        1 - ip address not valid 
-"""
-def validate_ip_address(address):
-    try:
-        ip = ipaddress.ip_address(address)
-        return 0
-    except ValueError:
-        return 1
-
-
 class User_register():
     users=[]
     def __init__(self,files):
@@ -89,12 +57,16 @@ class User_register():
         #print(listObj)
 
    
+
+   
     def setNameSurname(self, email, name): 
         if isinstance(name,str): 
+            if  not self.checkEmail(email):   return 
             for user in self.users:
                 if user.get("email")==email: 
                     user.update({"name":name})
-            return "No one is associated with " + email 
+                    return 
+            "No one is associated with " + email 
         else: 
             print("Given argument is not string!")
             
@@ -103,9 +75,8 @@ class User_register():
         if not isinstance(email,str): 
             print("Given argument is not string!")
             return 
-        if validate_ip_address(ip)==1: 
-            print("IP is not valid!")
-            return 
+        if not self.checkEmail(email): return 
+        if not self.validate_ip_address(ip): return 
         for user in self.users:
             if user.get("email")==email: 
                 user.update({"ip":ip})
@@ -116,6 +87,7 @@ class User_register():
     def setDevices(self, email, devices): 
         if isinstance(devices,list):
             valid=True
+            if not self.checkEmail(email):    return 
             for device in devices: 
                 if "laptop" not in device and "desktop" not in device and "mobile" not in device: 
                     valid=False
@@ -157,20 +129,24 @@ class User_register():
             string = string + str(user) + "\n"
         return string  
             
-
-    def checkEmail(email):
-        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
-        if (re.search(regex, email)):
-            return 0
-        else:
-            return 1
-
-    def validate_ip_address(address):
+  
+    #Validates ip addresses.
+    def validate_ip_address(self,address):
         try:
             ip = ipaddress.ip_address(address)
-            return 0
+            return True
         except ValueError:
-            print("IP address {} is not valid".format(address))
+             print("IP address {} is not valid".format(address))
+             return False
+
+    #Validates emails.
+    def checkEmail(self,email):
+        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
+        if (re.search(regex, email)):
+            print("Email is not valid")
+            return False
+        else:
+            return True
 
     def __len__(self):
         return len(self.users)
@@ -178,9 +154,24 @@ class User_register():
     def __getitem__(self,key):
         for i in range(len(self.users)):
             if(self.users[i]['email']==key):
-                u= self.users[i] 
-                return u
-
+               return self.users[i] 
+               
+    def __setitem__(self,key,value): 
+        if isinstance(key,str): 
+            if not self.checkEmail(key): return 
+        else: 
+            print("key is not string")
+            return 
+        if isinstance(value,list): 
+            self.setDevices(key,value) 
+        elif isinstance(value,str): 
+            try:
+                socket.inet_aton(value)
+                self.setIP(key,value) 
+            except socket.error:
+              self.setNameSurname(key,value) 
+        else: 
+            print("rvalue is not valid")
 
 def getListOfFiles(foldername): 
     files = glob.glob(os.path.join(foldername,'*'), recursive=True)
@@ -213,4 +204,13 @@ print(ur["bojan.djukic@rt-rk.com"])
 print("************************************************************")
 print(len(ur2))
         
+        
+print(ur["bojan.djukic@rt-rk.com"])
+ip_adresa= "192.168.100.2"
+ur["bojan.djukic@rt-rk.com"]=ip_adresa
+devices=["laptop1", " laptop2"]
+ur["bojan.djukic@rt-rk.com"]=devices
+ur["bojan.djukic@rt-rk.com"]="novo ime kolege"
+
+print(ur.getUser("bojan.djukic@rt-rk.com"))
 
