@@ -43,8 +43,14 @@ def validate_ip_address(address):
 class User_register:
     users=[]
 
-
-    def __init__(self,data):
+    def __init__(self,files):
+        result=[]
+        for single_file in files:
+            with open(single_file, 'r') as f:
+                studentDict = json.loads(f.read())
+                result.append(studentDict)
+        data=[]
+        for x in result: data += (x) 
         for d in data:
             added=False
             if len(self.users)==0:
@@ -162,21 +168,13 @@ class User_register:
                 return u
 
 
-def loadUsers(foldername): 
-    data=[]
+def getListOfFiles(foldername): 
     files = glob.glob(os.path.join(foldername,'*'), recursive=True)
     print(files)
-    for single_file in files:
-        print(single_file)
-        with open(single_file, 'r') as f:
-            studentDict = json.loads(f.read())
-            data.append(studentDict)
-    result=[]
-    for x in data: result += (x) 
-    return result 
+    return files 
 
 
-d = loadUsers('users')
+d = getListOfFiles('users')
 ur=User_register(d)
 print(ur)
 
