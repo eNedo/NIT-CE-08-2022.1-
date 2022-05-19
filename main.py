@@ -4,6 +4,8 @@ import json
 import glob
 import os
 from traceback import print_tb
+import re
+import ipaddress
 class User_register:
     users=[]
 
@@ -84,9 +86,31 @@ class User_register:
             if(self.users[i]['email']==key):
                 u = self.users[i] 
                 return u           
-               
+
+
+    
+
+
+
+
     def __len__(self):
         return len(self.users)
+
+    def checkEmail(email):
+        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
+        if (re.search(regex, email)):
+            return 0
+        else:
+            return 1
+
+    def validate_ip_address(address):
+        try:
+            ip = ipaddress.ip_address(address)
+            return 0
+        except ValueError:
+            print("IP address {} is not valid".format(address))
+
+
 
 
 def loadUsers(foldername): 
