@@ -40,39 +40,53 @@ def validate_ip_address(address):
         return 1
 
 
-class User_register:
-    users=[]
+class User_register():
 
     def __init__(self,files):
-        result=[]
+        self.files = files
+        datasum = []
         for single_file in files:
             with open(single_file, 'r') as f:
                 studentDict = json.loads(f.read())
-                result.append(studentDict)
-        data=[]
-        for x in result: data += (x) 
-        for d in data:
-            added=False
-            if len(self.users)==0:
-                self.users.append(dict(d))
-                added=True
-            
+                datasum.append(studentDict)
+
+        listObj = []
+        users = []
+        fsum=open('sumfile.json', 'w')
+        for data in datasum:
+            for i in range(len(data)):
+                if validate_ip_address(data[i]['ip']) != 0:
+                    print(f"Bad ip address {data[i]['ip']}!!!")
+                else:
+                    if check(data[i]['email']) != 0:
+                        print(f"Bad email address {data[i]['email']}!!!")
+                    else:
+                        listObj.append(data[i])
+        for d in listObj:
+            added = False
+            if len(users) == 0:
+                users.append(dict(d))
+                added = True
+
             if not added:
-                for i  in range(len(self.users)):
-                    if self.users[i]['email']==d['email']:
-                        dev1=self.users[i]['devices']
-                        dev2=d['devices']
-                        new_dev=[]
+                for i in range(len(users)):
+                    if users[i]['email'] == d['email']:
+                        dev1 = users[i]['devices']
+                        dev2 = d['devices']
+                        new_dev = []
                         for el in dev2:
                             if el not in dev1:
                                 new_dev.append(el)
                         if len(new_dev) != 0:
-                            for device in new_dev: self.users[i]['devices'].append(device)
-                            #print("pronadjen duplicirani unos: ",new_dev)
-                        added=True 
+                            users[i]['devices'].append(new_dev)
+                        added = True
             if not added:
-                self.users.append(dict(d))
-                added=True
+                users.append(dict(d))
+                added = True
+        json_object = json.dumps(users, indent=4)
+        fsum.write(json_object)
+        fsum.close()
+        print(listObj)
 
    
     def setNameSurname(self, email, name): 
