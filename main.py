@@ -6,10 +6,6 @@ import os
 import re
 import ipaddress
 from traceback import print_tb
-<<<<<<< HEAD
-import re
-import ipaddress
-=======
 
 
 
@@ -44,7 +40,6 @@ def validate_ip_address(address):
         return 1
 
 
->>>>>>> 20a1719a0dc3148ea99b9496eedb9374ca6b3ff5
 class User_register:
     users=[]
 
@@ -128,7 +123,7 @@ class User_register:
 
     def getIP(self,email):
         for user in self.users:
-            if user.get("email")==email: return user.get("ip")
+            if user.get("email")==email: return user.get("devices")
         return "No IP associated with " + email 
     
     def getUser(self,email): 
@@ -142,24 +137,6 @@ class User_register:
             string = string + str(user) + "\n"
         return string  
             
-<<<<<<< HEAD
-    def __getitem__(self,key):
-        for i in range(len(self.users)):
-            if(self.users[i]['email']==key):
-                u = self.users[i] 
-                return u           
-
-
-    
-
-
-
-
-    def __len__(self):
-        return len(self.users)
-=======
-
->>>>>>> 20a1719a0dc3148ea99b9496eedb9374ca6b3ff5
 
     def checkEmail(email):
         regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
@@ -175,7 +152,14 @@ class User_register:
         except ValueError:
             print("IP address {} is not valid".format(address))
 
-
+    def __len__(self):
+        return len(self.users)
+    
+    def __getitem__(self,key):
+        for i in range(len(self.users)):
+            if(self.users[i]['email']==key):
+                u= self.users[i] 
+                return u
 
 
 def loadUsers(foldername): 
@@ -207,7 +191,8 @@ ur.setNameSurname("bojan.djukic@rt-rk.com","xx")
 
 print(ur.getUser("bojan.djukic@rt-rk.com"))
 
-
+print(len(ur))
+print(ur["bojan.djukic@rt-rk.com"])
 
         
 
