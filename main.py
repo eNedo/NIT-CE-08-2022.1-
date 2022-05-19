@@ -34,6 +34,9 @@ class User_register:
                     
 
 
+    def __len__(self):
+        return len(self.users)
+
                        
                
 
@@ -59,7 +62,7 @@ d=(data1)+(data2)+(data3)+(data4)
 
 
 ur=User_register(d)
-
+print(len(ur))
 print(ur.users)
 
 
