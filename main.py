@@ -123,7 +123,7 @@ class User_register:
 
     def getIP(self,email):
         for user in self.users:
-            if user.get("email")==email: return user.get("devices")
+            if user.get("email")==email: return user.get("ip")
         return "No IP associated with " + email 
     
     def getUser(self,email): 
