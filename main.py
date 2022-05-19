@@ -79,7 +79,14 @@ class User_register:
             string = string + str(user) + "\n"
         return string  
             
-
+    def __getitem__(self,key):
+        for i in range(len(self.users)):
+            if(self.users[i]['email']==key):
+                u = self.users[i] 
+                return u           
+               
+    def __len__(self):
+        return len(self.users)
 
 
 def loadUsers(foldername): 
@@ -99,7 +106,7 @@ def loadUsers(foldername):
 d = loadUsers('users')
 ur=User_register(d)
 print(ur)
-
+print(len(ur))
 print(ur.getNameSurname("bojan.djukic@rt-rk.com"))
 print(ur.getDevices("bojan.djukic@rt-rk.com"))
 print(ur.getIP("bojn.djukic@rt-rk.com"))
@@ -108,6 +115,9 @@ devices =[ "uredjaj1", "uredjaj2"]
 ur.setDevices("bojan.djukic@rt-rk.com",devices)
 ur.setIP("bojan.djukic@rt-rk.com","1001")
 ur.setNameSurname("bojan.djukic@rt-rk.com","xx")
+
+print(ur["bojan.djukic@rt-rk.com"])
+
 
 print(ur.getUser("bojan.djukic@rt-rk.com"))
 
