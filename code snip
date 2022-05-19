@@ -1,0 +1,31 @@
+    def __mul__(self,other): 
+        result=User_register()
+        for user in self.users: 
+            for userx in other.users:
+                if userx['email']==user['email']:
+                    result.users.append(userx) 
+        return result 
+         
+
+def getListOfFiles(foldername): 
+    files = glob.glob(os.path.join(foldername,'*'), recursive=True)
+    print(files)
+    return files 
+
+
+d1 = getListOfFiles('c:/Users/nedot/Desktop/PYTHON kurs/projekat/users1')
+ur1=User_register(d1)
+#print(ur1)
+#ur1.users.clear()
+#print("ur1")
+#print(len(ur1))
+
+d2= getListOfFiles('c:/Users/nedot/Desktop/PYTHON kurs/projekat/users2')
+ur2=User_register(d2)
+#print("ur2")
+#print(len(ur2))
+#print(ur2)
+
+res= ur1*ur2
+
+print(res)
