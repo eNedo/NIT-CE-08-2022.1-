@@ -1,64 +1,50 @@
-from asyncore import read
-from hashlib import new
 import json
 import glob
 import os
+import socket
 import re
 import ipaddress
-from traceback import print_tb
 
 
-class User_register():
-    users=[]
-    def __init__(self,files):
-        self.files = files
-        datasum = []
-        for single_file in files:
-            with open(single_file, 'r') as f:
-                studentDict = json.loads(f.read())
-                datasum.append(studentDict)
-
-        listObj = []
-        #users = []
-        fsum=open('sumfile.json', 'w')
-        for data in datasum:
-            for i in range(len(data)):
-                if validate_ip_address(data[i]['ip']) != 0:
-                    print(f"Bad ip address {data[i]['ip']}!!!")
-                else:
-                    if check(data[i]['email']) != 0:
-                        print(f"Bad email address {data[i]['email']}!!!")
-                    else:
-                        listObj.append(data[i])
-        for d in listObj:
-            added = False
-            if len(self.users) == 0:
-                self.users.append(dict(d))
-                added = True
-
-            if not added:
-                for i in range(len(self.users)):
-                    if self.users[i]['email'] == d['email']:
-                        dev1 = self.users[i]['devices']
-                        dev2 = d['devices']
-                        new_dev = []
-                        for el in dev2:
-                            if el not in dev1:
-                                new_dev.append(el)
-                        if len(new_dev) != 0:
-                            self.users[i]['devices'].append(new_dev)
-                        added = True
-            if not added:
-                self.users.append(dict(d))
-                added = True
-        json_object = json.dumps(self.users, indent=4)
-        fsum.write(json_object)
-        fsum.close()
-        #print(listObj)
-
+class User_register:
    
+    def __init__(self,files=""):        #if we don't pass any files, we will create object with no users registered 
+        self.users = []                 #each object of User_register has it's own users 
+        if files != "":                 #TODO check can we open all files, report missing files etc. 
+            result=[]
+            for single_file in files:
+                with open(single_file, 'r') as f:
+                    studentDict = json.loads(f.read())
+                    result.append(studentDict)
+            data=[]
+            for x in result: data += (x) 
+            for d in data:
+                added=False
+                if len(self.users)==0:
+                    self.users.append(dict(d))
+                    added=True
+                
+                if not added:
+                    for i  in range(len(self.users)):
+                        if self.users[i]['email']==d['email']:
+                            dev1=self.users[i]['devices']
+                            dev2=d['devices']
+                            new_dev=[]
+                            for el in dev2:
+                                if el not in dev1:
+                                    new_dev.append(el)
+                            if len(new_dev) != 0:
+                                for device in new_dev: self.users[i]['devices'].append(device)
+                                #print("pronadjen duplicirani unos: ",new_dev)
+                            added=True 
+                if not added:
+                    self.users.append(dict(d))
+                    added=True
+        else:
+            self.users.clear()
+ 
 
-   
+
     def setNameSurname(self, email, name): 
         if isinstance(name,str): 
             if  not self.checkEmail(email):   return 
@@ -66,7 +52,7 @@ class User_register():
                 if user.get("email")==email: 
                     user.update({"name":name})
                     return 
-            "No one is associated with " + email 
+            print("No one is associated with " + email)
         else: 
             print("Given argument is not string!")
             
@@ -148,6 +134,7 @@ class User_register():
         else:
             return True
 
+
     def __len__(self):
         return len(self.users)
     
@@ -173,21 +160,107 @@ class User_register():
         else: 
             print("rvalue is not valid")
 
+    #overloaded + 
+    def __add__(self, other): 
+        if isinstance(other,User_register): 
+            result = User_register() 
+            result.users = list(self.users)     #make new list, result.users=self.users won't work 
+            for user in other.users: 
+                if not user in result.users:
+                    result.users.append(user)
+                else: 
+                    for userx in self.users: 
+                        if userx['email']==user['email']: 
+                            devices = userx['devices']
+                            for device in devices: 
+                                if device not in user['devices']: user['devices'].append(device)
+            return result
+        else: 
+            print("object is not valid!")
+    
+    # Overloaded += 
+    def __iadd__(self, other): 
+        if isinstance(other,User_register): 
+            for user in other.users: 
+                if not user in self.users:
+                    self.users.append(user)
+                else: 
+                    for userx in self.users: 
+                        if userx['email']==user['email']: 
+                            devices = userx['devices']
+                            for device in devices: 
+                                if device not in user['devices']: user['devices'].append(device)
+            return self
+        else: 
+            print("object is not valid!")
+
+
+    #TODO overload * operator 
+
+
+
+
 def getListOfFiles(foldername): 
     files = glob.glob(os.path.join(foldername,'*'), recursive=True)
     print(files)
     return files 
 
 
-d = getListOfFiles('users')
-ur=User_register(d)
-dd = getListOfFiles('users2')
-ur2=User_register(dd)
+d1 = getListOfFiles('users1')
+ur1=User_register(d1)
+print(ur1)
+#ur1.users.clear()
+print("ur1")
+print(len(ur1))
 
-print(ur)
-print("*********************************************************")
+d2= getListOfFiles('users2')
+ur2=User_register(d2)
+print("ur2")
+print(len(ur2))
 print(ur2)
 
+
+
+print()
+print("ur1+=ur2")
+ur1+=ur2
+print(ur1)
+print(len(ur1))
+
+print("ur1")
+print(len(ur1))
+print(ur1)
+
+print("ur2")
+print(len(ur2))
+print(ur2)
+ 
+
+"""
+print(ur1)
+#ur1.users.clear()
+print("ur1")
+print(len(ur1))
+
+
+print("ur2")
+print(len(ur2))
+print(ur2)
+ 
+
+
+print(len(res))
+print("xx")
+print(res)
+
+"""
+
+ 
+
+
+
+
+"""
 print(ur.getNameSurname("bojan.djukic@rt-rk.com"))
 print(ur.getDevices("bojan.djukic@rt-rk.com"))
 print(ur.getIP("bojn.djukic@rt-rk.com"))
@@ -195,16 +268,11 @@ print(ur.getIP("bojn.djukic@rt-rk.com"))
 devices =[ "desktop 1", "mobile 2"]
 ur.setDevices("bojan.djukic@rt-rk.com",devices)
 ur.setIP("bojan.djukic@rt-rk.com","100.100.100.100")
-ur.setNameSurname("bojan.djukic@rt-rk.com","xx")
+ur.setNameSurname("bojan.djukic@rt-rk.com","Bojan Djukic")
 
 print(ur.getUser("bojan.djukic@rt-rk.com"))
 
 print(len(ur))
-print(ur["bojan.djukic@rt-rk.com"])
-print("************************************************************")
-print(len(ur2))
-        
-        
 print(ur["bojan.djukic@rt-rk.com"])
 ip_adresa= "192.168.100.2"
 ur["bojan.djukic@rt-rk.com"]=ip_adresa
@@ -214,3 +282,4 @@ ur["bojan.djukic@rt-rk.com"]="novo ime kolege"
 
 print(ur.getUser("bojan.djukic@rt-rk.com"))
 
+"""
