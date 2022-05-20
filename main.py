@@ -19,11 +19,12 @@ class User_register:
             data=[]
             for x in result: data += (x) 
             for d in data:
+                if not self.checkEmail(d['email']):         break #check email and ip address, if invalid skip 
+                if not self.validate_ip_address(d['ip']):   break #if valid, insert data into users list 
                 added=False
                 if len(self.users)==0:
                     self.users.append(dict(d))
                     added=True
-                
                 if not added:
                     for i  in range(len(self.users)):
                         if self.users[i]['email']==d['email']:
@@ -34,16 +35,12 @@ class User_register:
                                 if el not in dev1:
                                     new_dev.append(el)
                             if len(new_dev) != 0:
-                                for device in new_dev: self.users[i]['devices'].append(device)
+                                for device in new_dev: self.users[i]['devices'].append(device)      #in case of multiple entries in .json files, merge devices
                                 #print("we found duplicate: ",new_dev)
                             added=True 
-                if not added:
-                    self.users.append(dict(d))
+                    if not added:  self.users.append(dict(d))
                     added=True
  
- 
-
-
     def setNameSurname(self, email, name): 
         if isinstance(name,str): 
             if  not self.checkEmail(email):   return 
@@ -118,15 +115,16 @@ class User_register:
     #Validates ip addresses.
     def validate_ip_address(self,address):
         try:
-            ip = ipaddress.ip_address(address)
+            ipaddress.ip_address(address)
             return True
         except ValueError:
              print("IP address {} is not valid".format(address))
              return False
 
-    #Validates emails.
+    #Validates emails.  
+    #TODO!!!!
     def checkEmail(self,email):
-        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$' 
+        regex = '^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$'
         if (re.search(regex, email)):
             print("Email is not valid")
             return False
@@ -165,13 +163,13 @@ class User_register:
             result = User_register() 
             result.users = list(self.users)     #make new list, result.users=self.users won't work 
             for user in other.users: 
-                    for userx in self.users: 
+                    for userx in self.users: #if user exists, merge devices list 
                         if userx['email']==user['email']: 
                             devices = userx['devices']
                             for device in devices: 
                                 if device not in user['devices']: user['devices'].append(device)
                             result.setDevices(userx['email'], user['devices'])
-                        else: 
+                        else: # if it doesn't already exist, add him 
                             if isinstance(result.getUser(user['email']), str): result.users.append(user)
             return result
         else: 
@@ -195,17 +193,17 @@ class User_register:
 
 
     def __mul__(self,other): 
-        result=User_register()
+        result=User_register()  #empty user register
         for user in self.users: 
             for userx in other.users:
-                if userx['email']==user['email']:
-                    if userx['ip']==user['ip']: 
+                if userx['email']==user['email']:#if users have same email
+                    if userx['ip']==user['ip']: #and same ip adress 
                         temp = userx 
                         devices = user['devices']
-                        for device in devices:  
+                        for device in devices:  #merge their devices 
                             if device not in temp['devices']:   temp['devices'].append(device)
-                        result.users.append(temp)
-                    else: 
+                        result.users.append(temp) #and add them to resulting user register 
+                    else: #else, skip the entry and print error message 
                         print(str(user) + " ---- " + str(userx) + "\n Korisnici imaju razlicitu IP adresu!") 
         return result 
 
