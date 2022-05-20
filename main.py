@@ -10,7 +10,7 @@ class User_register:
    
     def __init__(self,files=""):        #if we don't pass any files, we will create object with no users registered 
         self.users = []                 #each object of User_register has it's own users 
-        if files != "":                 #TODO check can we open all files, report missing files etc. 
+        if files != "":                  
             result=[]
             for single_file in files:
                 with open(single_file, 'r') as f:
@@ -35,13 +35,12 @@ class User_register:
                                     new_dev.append(el)
                             if len(new_dev) != 0:
                                 for device in new_dev: self.users[i]['devices'].append(device)
-                                #print("pronadjen duplicirani unos: ",new_dev)
+                                #print("we found duplicate: ",new_dev)
                             added=True 
                 if not added:
                     self.users.append(dict(d))
                     added=True
-        else:
-            self.users.clear()
+ 
  
 
 
@@ -195,32 +194,59 @@ class User_register:
             print("object is not valid!")
 
 
-    #TODO overload * operator 
-
+    def __mul__(self,other): 
+        result=User_register()
+        for user in self.users: 
+            for userx in other.users:
+                if userx['email']==user['email']:
+                    if userx['ip']==user['ip']: 
+                        temp = userx 
+                        devices = user['devices']
+                        for device in devices:  
+                            if device not in temp['devices']:   temp['devices'].append(device)
+                        result.users.append(temp)
+                    else: 
+                        print(str(user) + " ---- " + str(userx) + "\n Korisnici imaju razlicitu IP adresu!") 
+        return result 
 
 
 
 def getListOfFiles(foldername): 
-    files = glob.glob(os.path.join(foldername,'*'), recursive=True)
-    print(files)
+    files = glob.glob(os.path.join(foldername,'*'), recursive=True) 
+    for file in files: 
+        if ".json" not in file: 
+            files.remove(file)
     return files 
-
-
-d1 = getListOfFiles('users1')
-ur1=User_register(d1)
-print(ur1)
-#ur1.users.clear()
-print("ur1")
-print(len(ur1))
 
 d2= getListOfFiles('users2')
 ur2=User_register(d2)
-print("ur2")
+
+d1 = getListOfFiles('users1')
+ur1=User_register(d1)
+
+
+
+rezultat1 = ur1+ur2 
+rezultat2 = User_register()
+rezultat2+=ur2 
+rezultat2+=ur1
+
+print(rezultat1)
+print(rezultat2)
+
+print(len(ur1))
 print(len(ur2))
-print(ur2)
+print(len(rezultat1))
+print(len(rezultat2))
+
+presjek = ur1 * ur2 
+print(presjek)
+"""
+
+"""
 
 
-
+"""
 print()
 print("ur1+=ur2")
 ur1+=ur2
@@ -235,6 +261,7 @@ print("ur2")
 print(len(ur2))
 print(ur2)
  
+ """
 
 """
 print(ur1)
