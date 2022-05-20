@@ -165,14 +165,14 @@ class User_register:
             result = User_register() 
             result.users = list(self.users)     #make new list, result.users=self.users won't work 
             for user in other.users: 
-                if not user in result.users:
-                    result.users.append(user)
-                else: 
                     for userx in self.users: 
                         if userx['email']==user['email']: 
                             devices = userx['devices']
                             for device in devices: 
                                 if device not in user['devices']: user['devices'].append(device)
+                            result.setDevices(userx['email'], user['devices'])
+                        else: 
+                            if isinstance(result.getUser(user['email']), str): result.users.append(user)
             return result
         else: 
             print("object is not valid!")
@@ -181,14 +181,14 @@ class User_register:
     def __iadd__(self, other): 
         if isinstance(other,User_register): 
             for user in other.users: 
-                if not user in self.users:
-                    self.users.append(user)
-                else: 
                     for userx in self.users: 
                         if userx['email']==user['email']: 
                             devices = userx['devices']
                             for device in devices: 
                                 if device not in user['devices']: user['devices'].append(device)
+                            self.setDevices(userx['email'], user['devices'])
+                        else: 
+                            if isinstance(self.getUser(user['email']), str): self.users.append(user)
             return self
         else: 
             print("object is not valid!")
@@ -225,88 +225,15 @@ d1 = getListOfFiles('users1')
 ur1=User_register(d1)
 
 
+rezultat1 = ur1
+ur1+=ur2 
 
-rezultat1 = ur1+ur2 
-rezultat2 = User_register()
-rezultat2+=ur2 
-rezultat2+=ur1
 
-print(rezultat1)
-print(rezultat2)
+print(ur1)
 
 print(len(ur1))
 print(len(ur2))
 print(len(rezultat1))
-print(len(rezultat2))
 
 presjek = ur1 * ur2 
 print(presjek)
-"""
-
-"""
-
-
-"""
-print()
-print("ur1+=ur2")
-ur1+=ur2
-print(ur1)
-print(len(ur1))
-
-print("ur1")
-print(len(ur1))
-print(ur1)
-
-print("ur2")
-print(len(ur2))
-print(ur2)
- 
- """
-
-"""
-print(ur1)
-#ur1.users.clear()
-print("ur1")
-print(len(ur1))
-
-
-print("ur2")
-print(len(ur2))
-print(ur2)
- 
-
-
-print(len(res))
-print("xx")
-print(res)
-
-"""
-
- 
-
-
-
-
-"""
-print(ur.getNameSurname("bojan.djukic@rt-rk.com"))
-print(ur.getDevices("bojan.djukic@rt-rk.com"))
-print(ur.getIP("bojn.djukic@rt-rk.com"))
-
-devices =[ "desktop 1", "mobile 2"]
-ur.setDevices("bojan.djukic@rt-rk.com",devices)
-ur.setIP("bojan.djukic@rt-rk.com","100.100.100.100")
-ur.setNameSurname("bojan.djukic@rt-rk.com","Bojan Djukic")
-
-print(ur.getUser("bojan.djukic@rt-rk.com"))
-
-print(len(ur))
-print(ur["bojan.djukic@rt-rk.com"])
-ip_adresa= "192.168.100.2"
-ur["bojan.djukic@rt-rk.com"]=ip_adresa
-devices=["laptop1", " laptop2"]
-ur["bojan.djukic@rt-rk.com"]=devices
-ur["bojan.djukic@rt-rk.com"]="novo ime kolege"
-
-print(ur.getUser("bojan.djukic@rt-rk.com"))
-
-"""
