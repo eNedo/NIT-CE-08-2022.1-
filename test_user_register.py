@@ -1,11 +1,9 @@
 import unittest
-import logging
 from main import UserRegister, get_list_of_files
 
 
 class TestUserRegister(unittest.TestCase):
     def setUp(self):
-        logging.info("Setup test cases...")
         list_of_files = get_list_of_files('users')
         self.ur = UserRegister(list_of_files)
 
@@ -14,7 +12,7 @@ class TestUserRegister(unittest.TestCase):
             result = self.ur.set_name_username('jelena.kovacevic@rt-rk.com', 'Jelena Kovacevic')
             self.assertEqual('jelena.kovacevic@rt-rk.com', result, 'First test failed!')
         with self.subTest():
-            result = self.ur.set_name_username('pero.peric@rt-rk.com', 'Jelena Golub')
+            result = self.ur.set_name_username('pero.peric@rt-rk.com', 'Pero Peric')
             self.assertEqual(None, result, 'Second test failed!')
 
     def test_validate_ip_address(self):
@@ -88,3 +86,4 @@ class TestUserRegister(unittest.TestCase):
         with self.subTest():
             result = self.ur.check_email('jelenart-rk.com')
             self.assertEqual(False, result, 'Second test failed!')
+            

@@ -93,9 +93,9 @@ class UserRegister:
 
     def set_devices(self, email, devices):
         """
-
-        :param email:
-        :param devices:
+        Function to set devices.
+        :param email: Email of the user.
+        :param devices: Devices to be set.
         :return:
         """
         if isinstance(devices, list):
