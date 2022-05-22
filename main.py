@@ -34,9 +34,9 @@ class UserRegister:
                 data += x
             for d in data:
                 if not self.check_email(d['email']):
-                    break  # check email and ip address, if invalid skip
+                    continue  # check email and ip address, if invalid skip
                 if not self.validate_ip_address(d['ip']):
-                    break  # if valid, insert data into users list
+                    continue  # if valid, insert data into users list
                 added = False
                 if len(self.users) == 0:
                     self.users.append(dict(d))
