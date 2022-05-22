@@ -2,7 +2,7 @@
   {
     "name": "Nikola Jeftenic",
     "email": "nikola.jeftenic@rt-rk.com",
-    "ip": ".168.100.1",
+    "ip": "192.168.100.1",
     "devices": ["desktop RTRK-1", "mobile MB-1"]
   },
   {
