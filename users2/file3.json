@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Nikola Jeftenic",
+    "email": "nikola.jeftenic@rt-rk.com",
+    "ip": "192.168.100.1",
+    "devices": ["desktop RTRK-1", "mobile MB-1"]
+  },
+  {
+    "name": "Jelena Kovacevic",
+    "email": "jelena.kovacevic@rt-rk.com",
+    "ip": "192.168.100.2",
+    "devices": ["desktop RTRK-1", "mobile MB-1"]   
+  },
+    {
+    "name": "Nikola Svilar",
+    "email": "nikola.svilar@rt-rk.com",
+    "ip": "192.168.100.15",
+    "devices": ["desktop RTRK-15", "mobile MB-15"]  
+  },
+  {
+    "name": "Zelimir Maletic",
+    "email": "zelimir.maletic@rt-rk.com",
+    "ip": "192.168.100.16",
+    "devices": ["desktop RTRK-16", "mobile MB-16"]   
+  },
+  {
+    "name": "Nemanja Smitran",
+    "email": "nemanja.smitran@rt-rk.com",
+    "ip": "192.168.100.17",
+    "devices": ["desktop RTRK-17", "mobile MB-17"]   
+  },
+  {
+    "name": "Irena Ivic",
+    "email": "Irena.Ivic@rt-rk.com",
+    "ip": "192.168.100.18",
+    "devices": ["desktop RTRK-18", "mobile MB-18"]  
+  },
+  {
+    "name": "Maja Savic",
+    "email": "maja.savic@rt-rk.com",
+    "ip": "192.168.100.19",
+    "devices": ["desktop RTRK-19", "mobile MB-19"]    
+  },
+  {
+    "name": "Nikola Karpic",
+    "email": "nikola.karpic@rt-rk.com",
+    "ip": "192.168.100.20",
+    "devices": ["desktop RTRK-20", "mobile MB-20"]    
+  },
+  
+  {
+    "name": "Neki Lik",
+    "email": "neki.lik@rt-rk.com",
+    "ip": "192.168.111.20",
+    "devices": ["desktop RTRK-200", "mobile MB-201"]    
+  },
+  
+  {
+    "name": "Bas Cudan Lik",
+    "email": "bcdn.lik@rt-rk.com",
+    "ip": "192.168.121.20",
+    "devices": ["desktop RTRK-210", "mobile MB-221"]    
+  }
+  
+  
+  
+  
+]
